@@ -1,0 +1,36 @@
+using UnityEngine;
+
+public class BirdController : MonoBehaviour
+{
+    public float flapForce = 200f; // the force applied to the bird when flapping
+    public float fallSpeed = 3f; // the speed at which the bird falls
+
+    private Rigidbody2D rb;
+    private bool isFlapping = false;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            isFlapping = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (isFlapping)
+        {
+            rb.velocity = new Vector2(0f, flapForce);
+            isFlapping = false;
+        }
+        else
+        {
+            rb.velocity = new Vector2(0f, -fallSpeed);
+        }
+    }
+}
